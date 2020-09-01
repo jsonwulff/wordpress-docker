@@ -22,7 +22,7 @@ In order to make the files in wp editable, it is necessary to add the www-data u
 * [Understanding File Permissions: What Does “Chmod 777” Mean?](https://www.maketecheasier.com/file-permissions-what-does-chmod-777-means/)
 
 ## Improvment ideas for this boilerplate
-- [] Add PHPMyAdmin to docker-composer.yml
-- [] Add WP-cli to docker-composer.yml
-- [] Run some WP-cli commands to install WP, remove plugins and themes included with WP
-- [] Include most used plugins
+- [ ] Add PHPMyAdmin to docker-composer.yml
+- [ ] Add WP-cli to docker-composer.yml
+- [ ] Run some WP-cli commands to install WP, remove plugins and themes included with WP
+- [ ] Include most used plugins
