@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+    db:
+        container_name: ${APP_NAME}-db
+        image: mariadb:latest
+        restart: unless-stopped
+        networks:
+            - backend
+        volumes:
+            - db-vol:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: ${WORDPRESS_DB_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
+            MYSQL_USER: ${WORDPRESS_DB_USER}
+            MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+        labels:
+            - "traefik.enable=false"
+    
+    wordpress:
+        container_name: ${APP_NAME}-wp
+        image: wordpress:latest
+        restart: unless-stopped
+        depends_on:
+            - db
+        networks:
+            - backend
+            - frontend
+        volumes:
+            - ./wp-content:/var/www/html/wp-content/
+            - ./php.ini:/usr/local/etc/php/php.ini
+        environment:
+            WORDPRESS_DB_HOST: db:3306
+            WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+            WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+            WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.${APP_NAME}.rule=Host(`${WORDPRESS_DOMAIN}`)
+            - traefik.http.routers.${APP_NAME}.entrypoints=https
+            - traefik.http.routers.${APP_NAME}.tls.certresolver=dns-cloudflare
+
+volumes:
+    db-vol:
+
+networks: 
+    frontend:
+        external: true
+    backend: 
+        external: false
