@@ -26,7 +26,7 @@ services:
             - backend
             - frontend
         volumes:
-            - ./wp-content:/var/www/html/wp-content/
+            - ./wp:/var/www/html/
             - ./php.ini:/usr/local/etc/php/php.ini
         environment:
             WORDPRESS_DB_HOST: db:3306
@@ -38,6 +38,24 @@ services:
             - traefik.http.routers.${APP_NAME}.rule=Host(`${WORDPRESS_DOMAIN}`)
             - traefik.http.routers.${APP_NAME}.entrypoints=https
             - traefik.http.routers.${APP_NAME}.tls.certresolver=dns-cloudflare
+
+    wpcli:
+        container_name: ${APP_NAME}-wpcli
+        image: wordpress:cli
+        networks:
+            - frontend
+            - backend
+        volumes:
+            - ./wp:/var/www/html/
+        user: "33:33"
+        environment:
+            - APACHE_RUN_USER="www-data"
+            - APACHE_RUN_GROUP="www-data"
+        depends_on:
+            - db
+            - wordpress
+        command: bash -c "
+            sleep 40 && wp core install --url=$WORDPRESS_DOMAIN --title=$WORDPRESS_TITLE --admin_user=$WORDPRESS_ADMIN_USER --admin_email=$WORDPRESS_ADMIN_EMAIL --admin_password=$WORDPRESS_ADMIN_PASS"
 
 volumes:
     db-vol:
