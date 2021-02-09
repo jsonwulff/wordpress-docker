@@ -17,6 +17,8 @@ docker-compose up -d
 # #     --admin_email=$WORDPRESS_ADMIN_EMAIL\
 # #     --admin_password=$WORDPRESS_ADMIN_PASS \
 
+sleep 40
+
 echo ">> Updating permalinks..."
 docker-compose run --rm --no-deps wpcli option update permalink_structure '/%postname%/'
 
