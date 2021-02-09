@@ -23,7 +23,7 @@ Edit the `.env` file with the relevant data. The the Traefik labels for wordpres
 ## Usage
 
 ### Installation script
-You can either run `install.sh` which spins up the containers and perform some cleaning of the wordpress installtion. If the automate `WP-cli` installation does not succed it might be due to the fact that the WordPress container hasn't connected to the database yet. This can be fixed by inscreasing the sleep time command for `WP-cli`
+You can either run `install.sh` which spins up the containers and perform some cleaning of the wordpress installtion. If the automate `WP-cli` installation does not succed it might be due to the fact that the WordPress container hasn't connected to the database yet. This can be fixed by inscreasing the sleep time command for `WP-cli` or run the installation script again.
 
 ### Start container
 
