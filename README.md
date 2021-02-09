@@ -23,7 +23,7 @@ Make sure you have the latest versions of **Docker** and **Docker Compose** inst
 
 ## Configuration
 
-Edit the `.env` file with the relevant data. The the Traefik labels for wordpress might be changed to suit your needs aswell as the name of the external network. 
+Edit the `.env` file with the relevant data. The the Traefik labels for wordpress might be changed to suit your needs aswell as the name of the external network.
 
 ## Usage
 
@@ -44,6 +44,7 @@ docker-compose down
 ```
 
 ### Stop containers and remove persisntent data
+
 Either run the `uninstall.sh` script or use:
 
 ```bash
