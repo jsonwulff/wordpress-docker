@@ -111,5 +111,6 @@ wp --info
 - [ ] Add PHPMyAdmin to docker-composer.yml
 - [X] Add WP-cli to docker-composer.yml
 - [X] Run some WP-cli commands to install WP, remove plugins and themes included with WP
-- [ ] Include most used plugins
-- [ ] Update wp and plugins with WP command
+- [ ] Include most used plugins such as All-in-One WP Migration
+- [X] Update wp and plugins with WP command
+- [ ] Consider to add user group to file permissions and change file permission to include user group in the install script.
